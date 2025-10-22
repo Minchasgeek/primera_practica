@@ -34,7 +34,7 @@ header h1 {
 main {
   position: relative;
   width: 100%;
-  margin-top: 80px; /* espacio para el header fijo */
+  margin-top: 80px; 
   min-height: 400px;
 }
 
@@ -102,7 +102,7 @@ main {
 
 .feature {
   position: relative;
-  display: inline-block; /* permitido, opcional */
+  display: inline-block; 
   width: 28%;
   margin: 10px;
   border: 1px solid #144d14;
