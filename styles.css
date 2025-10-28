@@ -1,0 +1,278 @@
+/* ============================
+   Variables y resets básicos
+   ============================ */
+:root{
+  /* Colores */
+  --clr-bg: #0b0c10;
+  --clr-surface: #121318;
+  --clr-surface-2: #171922;
+  --clr-text: #e8eaf0;
+  --clr-muted: #9aa3b2;
+  --clr-primary: #3df0a5;
+  --clr-primary-600: #27c788;
+  --clr-ring: #8cf7cf;
+
+  /* Escalas */
+  --radius: 1.2rem;
+  --radius-sm: .75rem;
+  --space-1: .5rem;
+  --space-2: .75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --maxw: 1160px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --shadow-soft: 0 6px 18px rgba(0,0,0,.25);
+}
+
+/* Reset accesible */
+*{ box-sizing:border-box }
+html:focus-within{ scroll-behavior:smooth }
+html,body{ height:100% }
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  line-height: 1.5;
+}
+img{ max-width:100%; display:block }
+a{ color: var(--clr-primary) }
+a:hover{ color: var(--clr-primary-600) }
+h1,h2,h3{ line-height:1.2; margin: 0 0 var(--space-3) }
+
+.container{ width:min(100% - 2rem, var(--maxw)); margin-inline:auto }
+
+/* Utilidades reutilizables */
+.btn{
+  display:inline-block;
+  background: var(--clr-primary);
+  color:#0b0c10;
+  padding: .8rem 1.2rem;
+  border-radius: 999px;
+  text-decoration:none;
+  font-weight: 600;
+  border: 2px solid transparent;
+  transition: transform .12s ease, background .2s ease, box-shadow .2s ease;
+}
+.btn:hover{ transform: translateY(-1px) }
+.btn:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px var(--clr-ring);
+}
+.btn--ghost{
+  background: transparent;
+  color: var(--clr-text);
+  border-color: var(--clr-primary);
+}
+
+.card{
+  background: var(--clr-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  overflow: clip;
+}
+.card__media img{ aspect-ratio: 3/2; object-fit: cover }
+.card__body{ padding: var(--space-4) }
+
+/* Accesibilidad */
+.skip-link{
+  position: absolute;
+  inset-inline-start: 0.5rem;
+  inset-block-start: 0.5rem;
+  transform: translateY(-200%);
+  background: #fff;
+  color:#000;
+  padding: .5rem .75rem;
+  border-radius: .5rem;
+  z-index: 999;
+}
+.skip-link:focus{ transform:none }
+.sr-only{
+  position:absolute !important;
+  width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+.muted{ color: var(--clr-muted) }
+
+/* ============================
+   Header y navegación
+   ============================ */
+.site-header{
+  position: sticky; top:0; z-index: 50;
+  background: color-mix(in oklab, var(--clr-surface) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #1e2130;
+}
+.header-grid{
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding-block: .75rem;
+}
+.brand{ display:flex; gap:.6rem; align-items:center; text-decoration:none; color:inherit }
+.logo{ fill: var(--clr-primary) }
+.brand-text{ letter-spacing:.4px }
+
+.main-nav .nav-list{
+  list-style:none; display:flex; gap: clamp(.5rem, 2vw, 1.25rem);
+  padding:0; margin:0;
+}
+.main-nav a{
+  text-decoration:none; color: var(--clr-text);
+  padding:.4rem .6rem; border-radius:.5rem;
+}
+.main-nav a:focus-visible{ outline:2px solid var(--clr-ring) }
+
+/* ============================
+   Hero
+   ============================ */
+.hero{
+  background: radial-gradient(1200px 500px at 50% -20%, #1a1d29 0%, transparent 70%), linear-gradient(180deg, #0b0c10, #0b0c10);
+  padding-block: clamp(2rem, 5vw, 4rem);
+}
+.hero__content{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: var(--space-5);
+  align-items:center;
+}
+.hero__copy .lead{ color: var(--clr-muted); margin-block: var(--space-3) }
+.btn-row{ display:flex; gap: .75rem; flex-wrap: wrap }
+.hero__media img{ border-radius: var(--radius); box-shadow: var(--shadow) }
+
+/* ============================
+   Secciones base
+   ============================ */
+.section{ padding-block: clamp(2rem, 6vw, 4rem) }
+.section--alt{ background: var(--clr-surface-2) }
+.section--wide .container{ max-width: 1400px }
+.section__head{ margin-bottom: var(--space-4) }
+
+/* ============================
+   Grid de productos (CSS Grid)
+   ============================ */
+.grid{
+  display:grid;
+  gap: var(--space-4);
+}
+.products-grid{
+  grid-template-columns: repeat(12, 1fr);
+}
+.product{
+  grid-column: span 12;
+}
+@media (min-width: 560px){
+  .product{ grid-column: span 6 }
+}
+@media (min-width: 960px){
+  .product{ grid-column: span 3 }
+}
+
+.product__title{ margin:0 0 .25rem }
+.product__tagline{ margin:0 0 .75rem; color: var(--clr-muted) }
+.swatches{ display:flex; gap:.4rem; margin-bottom: .9rem }
+.swatch{
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid #222;
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--clr-surface) 80%, transparent);
+}
+.is-volt{ background:#d5ff00 }
+.is-black{ background:#000 }
+.is-white{ background:#fff }
+.is-red{ background:#e53935 }
+.is-blue{ background:#3f51b5 }
+.is-green{ background:#38b000 }
+.is-navy{ background:#13293d }
+
+/* ============================
+   Mapa / grid
+   ============================ */
+.map-grid{
+  display:grid; gap: var(--space-4);
+  grid-template-columns: 1fr;
+}
+.map img{ border-radius: var(--radius) }
+@media (min-width: 900px){
+  .map-grid{ grid-template-columns: .9fr 1.1fr; align-items:center }
+}
+
+/* ============================
+   Features
+   ============================ */
+.features-grid{
+  grid-template-columns: repeat(12, 1fr);
+}
+.feature{ grid-column: span 12 }
+@media (min-width: 800px){
+  .feature{ grid-column: span 4 }
+}
+
+/* ============================
+   Banner destacado
+   ============================ */
+.featured-banner{
+  display:grid; gap: var(--space-4);
+  grid-template-columns: 1fr;
+  align-items:center;
+}
+.featured-banner__media img{ border-radius: var(--radius) }
+.featured-banner__copy p{ color: var(--clr-muted) }
+@media (min-width: 900px){
+  .featured-banner{ grid-template-columns: 1.2fr .8fr }
+}
+
+/* ============================
+   Newsletter
+   ============================ */
+.newsletter{
+  display:grid; gap: var(--space-3);
+  grid-template-columns: 1fr auto;
+  align-items:end;
+  max-width: 560px;
+}
+.field{ display:grid; gap:.4rem; width:100% }
+.field__label{ font-weight:600 }
+.field__input{
+  width:100%;
+  padding:.9rem 1rem;
+  border-radius: .7rem;
+  border:1px solid #2a2d3b;
+  background:#0e1016;
+  color:var(--clr-text);
+}
+.field__input::placeholder{ color:#7e8697 }
+.field__input:focus{ outline:none; border-color: var(--clr-ring); box-shadow: 0 0 0 3px color-mix(in oklab, var(--clr-ring) 60%, transparent) }
+.form-help{ color: var(--clr-muted); grid-column: 1 / -1 }
+
+/* ============================
+   Footer
+   ============================ */
+.site-footer{
+  border-top: 1px solid #1e2130;
+  background: #0a0b10;
+  padding-block: var(--space-5);
+}
+.footer-grid{
+  display:grid; gap: var(--space-4);
+  grid-template-columns: 1fr;
+  align-items:start;
+}
+.footer-links{
+  list-style:none; padding:0; margin:0; display:grid; gap:.4rem;
+}
+.footer-links a{ text-decoration:none; color: var(--clr-text) }
+.footer-links a:hover{ color: var(--clr-primary) }
+.social{ display:flex; gap: .75rem; flex-wrap:wrap }
+@media (min-width: 800px){
+  .footer-grid{ grid-template-columns: 1fr 1fr 1fr }
+}
+
+/* ============================
+   Responsividad global
+   ============================ */
+@media (max-width: 640px){
+  .main-nav{ display:none } /* simplificación móvil; se podría sustituir por menú burger */
+  .btn--ghost{ display:none }
+}
