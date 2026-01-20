@@ -40,7 +40,7 @@ try {
   // 6) Escribir JSON 
   fs.writeFileSync(OUTPUT_JSON, JSON.stringify(result, null, 2), "utf-8");
 
-  console.log(`✅ Generado ${OUTPUT_JSON} con ${result.length} registros.`);
+  console.log(`Generado ${OUTPUT_JSON} con ${result.length} registros.`);
 } catch (err) {
   console.error(" Error:", err.message);
 }
